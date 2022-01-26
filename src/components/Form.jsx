@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const Form = ({hidden, updateFoodsDisplayed, toggleForm}) => {
+const Form = ({hidden, addFoodItem, toggleForm}) => {
   const [name, setName] = useState('');
   const [calories, setCalories] = useState('');
   const [image, setImage] = useState('');
@@ -10,7 +10,7 @@ const Form = ({hidden, updateFoodsDisplayed, toggleForm}) => {
     const newFood = {name, calories, image};
     console.log(newFood);
     console.log(typeof newFood);
-    updateFoodsDisplayed(newFood);
+    addFoodItem(newFood);
     toggleForm();
   }
 
