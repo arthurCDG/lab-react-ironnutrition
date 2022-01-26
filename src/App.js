@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import allFoods from './foods.json';
+import FoodBox from './components/FoodBox.jsx';
+import Form from './components/Form';
 
 function App() {
+  const [foods, setFoods] = useState(allFoods);
+  const [hidden, setHidden] = useState(true);
+
+  const updateFoodsDisplayed = (newFoodItem) => {
+    setFoods([...foods, newFoodItem]);
+  };
+
+  const toggleForm = () => {
+    setHidden(!Boolean(hidden));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Lab React - IronNutrition</h1>
+      {!hidden && (
+        <Form
+          hidden={hidden}
+          updateFoodsDisplayed={updateFoodsDisplayed}
+          toggleForm={toggleForm}
+        />
+      )}
+      <button onClick={() => toggleForm()}>Add new food</button>
+      {foods.map((food) => (
+        <FoodBox
+          key={food.name}
+          name={food.name}
+          calories={food.calories}
+          image={food.image}
+        />
+      ))}
     </div>
   );
 }
