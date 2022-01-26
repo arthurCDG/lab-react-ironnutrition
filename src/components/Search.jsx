@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Search = ({setSearchValue}) => {
+const Search = ({ setSearchValue }) => {
   return (
     <>
-        <input type="text" onChange={(evt) => setSearchValue(evt.target.value)}/>
+      <input
+        type="text"
+        placeholder="search a specific food"
+        onChange={(evt) => setSearchValue(evt.target.value)}
+      />
     </>
   );
 };

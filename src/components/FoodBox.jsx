@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 
-const FoodBox = ({ name, calories, image }) => {
-  const [quantity, setQuantitiy] = useState(0);
+const FoodBox = ({ name, calories, image, addNewTodaysFoodItem }) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const handleClick = () => {
+    setQuantity(0);
+    addNewTodaysFoodItem({name, calories, quantity});
+  };
 
   return (
     <div className="box">
@@ -26,11 +31,11 @@ const FoodBox = ({ name, calories, image }) => {
                 className="input"
                 type="number"
                 value={quantity}
-                onChange={(evt) => setQuantitiy(evt.target.value)}
+                onChange={(evt) => setQuantity(evt.target.value)}
               />
             </div>
             <div className="control">
-              <button className="button is-info">+</button>
+              <button className="button is-info" onClick={() => handleClick()}>+</button>
             </div>
           </div>
         </div>
