@@ -4,8 +4,8 @@ const TodaysFoodItem = ({ todaysFood, removeTodaysFoodItem }) => {
   return (
     <>
       {todaysFood.map((foodItem, i) => (
-        <li key={i} className="is-flex is-justify-content-space-evenly">
-          <div>
+        <li key={i} className="is-flex is-justify-content-right m-4">
+          <div className='mr-6'>
             <span>{foodItem.quantity} </span>
             <span>{foodItem.name}</span>
             <span>{Number(foodItem.quantity) !== 1 && 's'} - </span>
@@ -24,6 +24,10 @@ const TodaysFoodItem = ({ todaysFood, removeTodaysFoodItem }) => {
             >
               Delete
             </button>
+          </span>
+          {/* -------------- TESTS -------------- */}
+          <span className='icon'>
+            <i className="fas fa-ban"></i>
           </span>
         </li>
       ))}

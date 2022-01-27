@@ -18,7 +18,7 @@ const Form = ({ addFoodItem, setHidden }) => {
   };
 
   return (
-    <form onSubmit={(evt) => handleSubmit(evt)} className="m-4">
+    <form onSubmit={(evt) => handleSubmit(evt)} className="m-4 box">
       <input
         className="input m-4"
         type="text"

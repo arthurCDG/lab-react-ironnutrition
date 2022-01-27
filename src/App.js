@@ -51,7 +51,7 @@ function App() {
     : updateFoodDisplayed(searchValue);
 
   return (
-    <div className="App p-4">
+    <div className="App p-4 has-background-light">
       <h1 className="is-size-1 p-6">Lab React - IronNutrition</h1>
       {!hidden && (
         <Form
