@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 const Form = ({ addFoodItem, setHidden }) => {
   const [name, setName] = useState('');
   const [calories, setCalories] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
+  const [fileName, setFileName] = useState('No file uploaded yet');
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -11,50 +12,53 @@ const Form = ({ addFoodItem, setHidden }) => {
     addFoodItem(newFood);
   };
 
+  const handleFileUpload = (evt) => {
+    setImage(URL.createObjectURL(evt.target.files[0]));
+    setFileName(evt.target.files[0].name);
+  };
+
   return (
-    <form onSubmit={(evt) => handleSubmit(evt)}>
+    <form onSubmit={(evt) => handleSubmit(evt)} className="m-4">
       <input
-        className="input"
+        className="input m-4"
         type="text"
         name="name"
         placeholder="Name"
         onChange={(evt) => setName(evt.target.value)}
       />
       <input
-        className="input"
+        className="input m-4"
         type="text"
         name="calories"
         placeholder="Calories"
         onChange={(evt) => setCalories(evt.target.value)}
       />
-      <div className="file">
-        <label className="file-label">
+      <div class="file has-name is-boxed m-4">
+        <label class="file-label">
           <input
             className="file-input"
             type="file"
             name="image"
-            onChange={(evt) =>
-              setImage(URL.createObjectURL(evt.target.files[0]))
-            }
+            onChange={(evt) => handleFileUpload(evt)}
           />
-          <span className="file-cta">
-            <span className="file-icon">
-              <i className="fas fa-upload"></i>
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
             </span>
-            <span className="file-label">Choose a file…</span>
+            <span class="file-label">Choose a file…</span>
           </span>
+          <span class="file-name">{fileName}</span>
         </label>
       </div>
-      {/* <input
-        className="file"
-        type="file"
-        name="image"
-        onChange={(evt) => setImage(URL.createObjectURL(evt.target.files[0]))}
-      /> */}
-      <button className="button" onClick={() => setHidden()}>
-        Cancel
-      </button>
-      <button className="button">Add food</button>
+      <div className="is-flex is-justify-content-right">
+        <button
+          className="button is-danger is-outlined mx-3"
+          onClick={() => setHidden()}
+        >
+          Cancel
+        </button>
+        <button className="button is-success mx-3">Add food</button>
+      </div>
     </form>
   );
 };

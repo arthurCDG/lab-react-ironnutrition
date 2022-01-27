@@ -51,15 +51,15 @@ function App() {
     : updateFoodDisplayed(searchValue);
 
   return (
-    <div className="App">
-      <h1 className="is-size-1">Lab React - IronNutrition</h1>
+    <div className="App p-4">
+      <h1 className="is-size-1 p-6">Lab React - IronNutrition</h1>
       {!hidden && (
         <Form
           addFoodItem={addFoodItem}
           setHidden={setHidden}
         />
       )}
-      {hidden && <button className="button" onClick={() => setHidden(!Boolean(hidden))}>Add new food</button>}
+      {hidden && <button className="button is-info" onClick={() => setHidden(!Boolean(hidden))}>Add new food</button>}
       <hr />
       <Search setSearchValue={setSearchValue} />
       <hr />
