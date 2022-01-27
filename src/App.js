@@ -16,6 +16,7 @@ function App() {
 
   const addFoodItem = (newFoodItem) => {
     setFoods([...foods, newFoodItem]);
+    setHidden(!Boolean(hidden));
   };
 
   const updateFoodDisplayed = (search) => {
@@ -24,22 +25,20 @@ function App() {
     );
   };
 
-  const toggleForm = () => {
-    setHidden(!Boolean(hidden));
-  };
-
   const addNewTodaysFoodItem = (newTodaysFoodItem) => {
     const copy = [...todaysFood];
+    let totalCaloriesToRemove = 0;
 
     if (copy.some( el => el.name === newTodaysFoodItem.name)) {
       const index = copy.findIndex(el => el.name === newTodaysFoodItem.name);
+      totalCaloriesToRemove = copy[index].quantity * copy[index].calories;
       copy[index].quantity = newTodaysFoodItem.quantity;
     } else {
       copy.push(newTodaysFoodItem);
     }
 
     setTodaysFood(copy);
-    setTotalCal(totalCal + (newTodaysFoodItem.calories * newTodaysFoodItem.quantity))
+    setTotalCal(totalCal - totalCaloriesToRemove + (newTodaysFoodItem.calories * newTodaysFoodItem.quantity))
   };
 
   const removeTodaysFoodItem = (foodItemToRemove) => {
@@ -53,15 +52,13 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Lab React - IronNutrition</h1>
+      <h1 className="is-size-1">Lab React - IronNutrition</h1>
       {!hidden && (
         <Form
-          hidden={hidden}
           addFoodItem={addFoodItem}
-          toggleForm={toggleForm}
         />
       )}
-      <button onClick={() => toggleForm()}>Add new food</button>
+      {hidden && <button className="button" onClick={() => setHidden(!Boolean(hidden))}>Add new food</button>}
       <hr />
       <Search setSearchValue={setSearchValue} />
       <hr />
@@ -78,7 +75,7 @@ function App() {
         ))}
         </div>
         <div className='column'>
-          <h1>Today's foods</h1>
+          <h1 className="is-size-2">Today's foods</h1>
           <ul>
             <TodaysFoodItem todaysFood={todaysFood} removeTodaysFoodItem={removeTodaysFoodItem}/>
           </ul>
