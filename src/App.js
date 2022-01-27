@@ -56,6 +56,7 @@ function App() {
       {!hidden && (
         <Form
           addFoodItem={addFoodItem}
+          setHidden={setHidden}
         />
       )}
       {hidden && <button className="button" onClick={() => setHidden(!Boolean(hidden))}>Add new food</button>}

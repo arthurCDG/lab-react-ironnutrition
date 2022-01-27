@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Form = ({ addFoodItem }) => {
+const Form = ({ addFoodItem, setHidden }) => {
   const [name, setName] = useState('');
   const [calories, setCalories] = useState('');
   const [image, setImage] = useState('');
@@ -51,6 +51,9 @@ const Form = ({ addFoodItem }) => {
         name="image"
         onChange={(evt) => setImage(URL.createObjectURL(evt.target.files[0]))}
       /> */}
+      <button className="button" onClick={() => setHidden()}>
+        Cancel
+      </button>
       <button className="button">Add food</button>
     </form>
   );
